@@ -80,7 +80,7 @@ func (s *Storage) GetURL(alias string) (string, error) {
 	err = stmt.QueryRow(alias).Scan(&resURL)
 
 	if errors.Is(err, sql.ErrNoRows) {
-		return "", fmt.Errorf("%s: %w", op, err)
+		return "", storage.ErrURLNotFound
 	}
 	if err != nil {
 		return "", fmt.Errorf("%s: %w", op, err)
@@ -89,3 +89,5 @@ func (s *Storage) GetURL(alias string) (string, error) {
 	return resURL, nil
 
 }
+
+//func (s *Storage) DeleteURL(alias string) error {}
